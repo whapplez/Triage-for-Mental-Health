@@ -8,8 +8,8 @@
   
     // Replace with your own subscription key, service region (e.g., "westus"),
     // and recognition language.
-    subscriptionKey:   "YourSubscriptionKey",
-    serviceRegion:     "YourServiceRegion", // e.g., "westus"
+    subscriptionKey:   "69bf72d478074f46abe35d0fe6bccd64",
+    serviceRegion:     "eastus", // e.g., "westus"
     language:          "en-US",
   
     // Replace with the full path to a wav file you want to recognize.

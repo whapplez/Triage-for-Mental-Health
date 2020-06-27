@@ -20,7 +20,7 @@ module.exports = {
 
     // create the speech recognizer.
     var reco = new sdk.SpeechRecognizer(speechConfig, audioConfig);
-
+    
     // Before beginning speech recognition, setup the callbacks to be invoked when an event occurs.
 
     // The event recognizing signals that an intermediate recognition result is received.
