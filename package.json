@@ -4,8 +4,9 @@
   "description": "a portal that helps triage and schedule patients appointments with mental health professionals",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server/server.js",
+    "client": "node start-client.js"
   },
   "repository": {
     "type": "git",
