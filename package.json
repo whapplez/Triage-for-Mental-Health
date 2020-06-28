@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/sjoshi804/Triage-for-Mental-Health#readme",
   "dependencies": {
+    "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",

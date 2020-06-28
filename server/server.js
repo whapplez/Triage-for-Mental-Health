@@ -8,7 +8,7 @@ const config = require('./.config.js')
 const logger = require('./middleware/logger.js')
 const MongoClient = require('mongodb').MongoClient;
 
-// Setting to 3000
+// Setting to 3001
 let port = 3001;
 
 var voiceRouter = require('./apps/voice/routes.js');
