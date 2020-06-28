@@ -30,6 +30,22 @@ app.use('/sms', smsRouter);
 //Connect Triage Data Routes
 app.use('/triageData', triageDataRouter);
 
+var testData = [
+{
+  name: ' Aniya Brown',
+  recording_url: ' audio.wav',
+  priority : '5 severe'
+},
+{
+  name: ' Matt Ground',
+  recording_url: ' audiohelp.wav',
+  priority: '2 severe'
+}];
+
+app.post('/api', function(req, res){
+  res.send(JSON.stringify(testData))
+});
+
 //Serve react app build if in production
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
