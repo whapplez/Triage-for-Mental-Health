@@ -9,7 +9,7 @@ const logger = require('./middleware/logger.js')
 const MongoClient = require('mongodb').MongoClient;
 
 // Setting to 3000
-let port = 3000;
+let port = 3001;
 
 var voiceRouter = require('./apps/voice/routes.js');
 var smsRouter = require('./apps/sms/routes.js');
@@ -37,6 +37,11 @@ if (process.env.NODE_ENV === 'production') {
 // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
+else{
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../client/public', 'index.html'));
   });
 }
 
