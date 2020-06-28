@@ -2,9 +2,10 @@
   "name": "triage-for-mental-health",
   "version": "1.0.0",
   "description": "a portal that helps triage and schedule patients appointments with mental health professionals",
-  "main": "server/index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/sjoshi804/Triage-for-Mental-Health/issues"
   },
-  "homepage": "https://github.com/sjoshi804/Triage-for-Mental-Health#readme"
+  "homepage": "https://github.com/sjoshi804/Triage-for-Mental-Health#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "moment": "^2.27.0",
+    "mongodb": "^3.5.9",
+    "path": "^0.12.7",
+    "twilio": "^3.47.0"
+  }
 }
