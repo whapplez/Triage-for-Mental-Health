@@ -1,3 +1,7 @@
+//Import Patient Reponse Constructor
+const PatientResponse = require('../models.js');
+const { request } = require('express');
+
 //Get Voice Reponse object
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
@@ -5,17 +9,26 @@ exports.initial = (request, response) => {
     // Use the Twilio Node.js SDK to build an XML response
     const twiml = new VoiceResponse();
     twiml.say({ voice: 'alice' }, 'Hi, thank you for reaching out to Triage today and for taking the first step in your journey to bettering your mental health. I am now going to ask you a few personal question to better understand how we can help you. This call will be recorded.');
-  
-    //Get Basic Info about caller
-    twiml.say('Please state your full name and age.')
+
+    // Create new database entry for caller
+    //Construct new object
+    let newPatientResponse = new PatientResponse(
+      `${moment().format('YYYY-MM-DD HH:mm:ss')}`,
+      request.body.From,
+      "Voice");
+    // Ingest into db
+    request.app.db.collection('patient_responses').insertOne(newPatientResponse);
+
+    // Get Basic Info about caller
+    twiml.say({voice: 'alice'}, '')
     // Use <Record> to record the caller's message
     twiml.record({
       timeout: 60,
-      action: '',
+      action: '/voice/q1',
       finishOnKey: '1234567890*#',
-      recordingStatusCallback: '/voice/recording',
+      recordingStatusCallback: '/voice/initial/recording',
       transcribe: true,
-      transcribeCallback: '/voice/transcription'
+      transcribeCallback: '/voice/initial/transcription'
     });
   
     twiml.hangup();
@@ -24,3 +37,134 @@ exports.initial = (request, response) => {
     response.send(twiml.toString());
   }
 
+  exports.initial_transcription = (request, response) => {
+    request.body.TranscriptionText
+  }
+
+  exports.q1 = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Question 1');
+  
+    // Use <Record> to record the caller's message
+    twiml.record({
+      timeout: 60,
+      action: '/voice/q2',
+      finishOnKey: '1234567890*#',
+      recordingStatusCallback: '/voice/q1/recording',
+      transcribe: true,
+      transcribeCallback: '/voice/q1/transcription'
+    });
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
+
+  exports.q2 = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Question 2');
+  
+    // Use <Record> to record the caller's message
+    twiml.record({
+      timeout: 60,
+      action: '/voice/q3',
+      finishOnKey: '1234567890*#',
+      recordingStatusCallback: '/voice/q2/recording',
+      transcribe: true,
+      transcribeCallback: '/voice/q2/transcription'
+    });
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
+
+  exports.q3 = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Question 3');
+  
+    // Use <Record> to record the caller's message
+    twiml.record({
+      timeout: 60,
+      action: '/voice/q4',
+      finishOnKey: '1234567890*#',
+      recordingStatusCallback: '/voice/q3/recording',
+      transcribe: true,
+      transcribeCallback: '/voice/q3/transcription'
+    });
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
+
+  exports.q4 = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Question 1');
+  
+    // Use <Record> to record the caller's message
+    twiml.record({
+      timeout: 60,
+      action: '/voice/q5',
+      finishOnKey: '1234567890*#',
+      recordingStatusCallback: '/voice/q4/recording',
+      transcribe: true,
+      transcribeCallback: '/voice/q4/transcription'
+    });
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
+
+  exports.q5 = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Question 5');
+  
+    // Use <Record> to record the caller's message
+    twiml.record({
+      timeout: 60,
+      action: '/voice/end',
+      finishOnKey: '1234567890*#',
+      recordingStatusCallback: '/voice/q5/recording',
+      transcribe: true,
+      transcribeCallback: '/voice/q5/transcription'
+    });
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
+
+  exports.end = (request, response) => {
+    // Use the Twilio Node.js SDK to build an XML response
+    const twiml = new VoiceResponse();
+
+    //Ask Question
+    twiml.say({ voice: 'alice' }, 'Thank you for your responses, someone will reach out to you to schedule an appointment as soon as possible.');
+  
+    twiml.hangup();
+    // Render the response as XML in reply to the webhook request
+    response.type('text/xml');
+    response.send(twiml.toString());
+  }
