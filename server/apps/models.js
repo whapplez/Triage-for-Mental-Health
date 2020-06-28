@@ -1,5 +1,3 @@
-const { SerializableClass } = require("twilio/lib/interfaces");
-
 //Constructor for Patient Response
 class PatientResponse{
     constructor(time, phone_number, medium){
