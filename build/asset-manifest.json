@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/sjoshi804/Triage-for-Mental-Healthstatic/css/main.523f09c5.chunk.css",
+    "main.js": "/sjoshi804/Triage-for-Mental-Healthstatic/js/main.fe5a0a56.chunk.js",
+    "main.js.map": "/sjoshi804/Triage-for-Mental-Healthstatic/js/main.fe5a0a56.chunk.js.map",
+    "runtime-main.js": "/sjoshi804/Triage-for-Mental-Healthstatic/js/runtime-main.ee5da70c.js",
+    "runtime-main.js.map": "/sjoshi804/Triage-for-Mental-Healthstatic/js/runtime-main.ee5da70c.js.map",
+    "static/js/2.d6194c23.chunk.js": "/sjoshi804/Triage-for-Mental-Healthstatic/js/2.d6194c23.chunk.js",
+    "static/js/2.d6194c23.chunk.js.map": "/sjoshi804/Triage-for-Mental-Healthstatic/js/2.d6194c23.chunk.js.map",
+    "index.html": "/sjoshi804/Triage-for-Mental-Healthindex.html",
+    "precache-manifest.3dd49bc96d2baa1c71e19a070c350dd8.js": "/sjoshi804/Triage-for-Mental-Healthprecache-manifest.3dd49bc96d2baa1c71e19a070c350dd8.js",
+    "service-worker.js": "/sjoshi804/Triage-for-Mental-Healthservice-worker.js",
+    "static/css/main.523f09c5.chunk.css.map": "/sjoshi804/Triage-for-Mental-Healthstatic/css/main.523f09c5.chunk.css.map",
+    "static/js/2.d6194c23.chunk.js.LICENSE.txt": "/sjoshi804/Triage-for-Mental-Healthstatic/js/2.d6194c23.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/sjoshi804/Triage-for-Mental-Healthstatic/media/logo.ee7cd8ed.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee5da70c.js",
+    "static/js/2.d6194c23.chunk.js",
+    "static/css/main.523f09c5.chunk.css",
+    "static/js/main.fe5a0a56.chunk.js"
+  ]
+}
