@@ -9,7 +9,7 @@ const logger = require('./middleware/logger.js')
 const MongoClient = require('mongodb').MongoClient;
 
 // Setting to 3001
-let port = 3001;
+let port = 8080;
 
 var voiceRouter = require('./apps/voice/routes.js');
 var smsRouter = require('./apps/sms/routes.js');
