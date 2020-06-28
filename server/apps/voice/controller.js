@@ -1,6 +1,7 @@
 //Import Patient Reponse Constructor
-const PatientResponse = require('../models.js');
+const Models = require('../models.js')
 const { request } = require('express');
+const e = require('express');
 
 //Get Voice Reponse object
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
@@ -12,7 +13,7 @@ exports.initial = (request, response) => {
 
     // Create new database entry for caller
     //Construct new object
-    let newPatientResponse = new PatientResponse(
+    let newPatientResponse = new Models.PatientResponse(
       `${moment().format('YYYY-MM-DD HH:mm:ss')}`,
       request.body.From,
       "Voice");
@@ -38,7 +39,64 @@ exports.initial = (request, response) => {
   }
 
   exports.initial_transcription = (request, response) => {
-    request.body.TranscriptionText
+    const patient_phone_number = request.body.From;
+
+    //Check if initial response object doesn't exist
+    if (request.app.db.collection('patient_responses').findOne(
+      {
+        phone_number: patient_phone_number,
+        responses: {question_id: "initial"}
+      }) == null)
+    {
+      // if it doesn't exists add one to the response set
+      request.app.db.collection('patient_responses').updateOne(
+        {phone_number: patient_phone_number},
+        {$addToSet: 
+          {responses: new Models.VoiceResponseObject("initial", null, request.body.TranscriptionText, request.body.TranscriptionUrl)}
+        }
+      );
+    }
+    else
+    {
+      //else update the existing response object for initial question
+      //Hacky make better
+      
+      //get object
+      var patient_response_doc = request.app.db.collection('patient_responses').findOne(
+        {
+          phone_number: patient_phone_number,
+          responses:
+          {
+            question_id: "initial"
+          }
+        }
+      );
+      
+      console.log(patient_response_doc);
+
+      //pop old object
+      request.app.db.collection('patient_responses').updateOne(
+        {
+          phone_number: patient_phone_number
+        },
+        {
+          $pull: 
+          { responses: 
+            { 
+              question_id: "initial"
+            }
+          }
+        }
+      );
+
+      //insert updated object
+      request.app.db.collection('patient_responses').updateOne(
+        {phone_number: patient_phone_number},
+        {$addToSet: 
+          {responses: new Models.VoiceResponseObject("initial", null, request.body.TranscriptionText, request.body.TranscriptionUrl)}}
+      );
+
+    }
   }
 
   exports.q1 = (request, response) => {
